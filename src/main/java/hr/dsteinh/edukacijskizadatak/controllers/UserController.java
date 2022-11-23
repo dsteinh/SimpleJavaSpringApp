@@ -28,7 +28,7 @@ public class UserController {
 
     @PostMapping("/user/create_user")
     public RedirectView saveNewUser(@ModelAttribute User newUser) {
-        //System.out.println(newUser);
+        System.out.println(newUser);
         userService.save(newUser);
         return new RedirectView("index");
     }

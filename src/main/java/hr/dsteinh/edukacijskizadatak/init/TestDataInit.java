@@ -15,10 +15,10 @@ public class TestDataInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        User mirko = new User("Mirko", "Kralj", "123124124");
-        userService.save(mirko);
-        User jovan = new User("Jovan", "Mirić", "9875311122");
-        userService.save(jovan);
+        User tony = new User("Tony", "Stark", "3000");
+        userService.save(tony);
+        User steve = new User("Steve", "Rogers", "9875311122");
+        userService.save(steve);
         User milica = new User("Milica", "Krmpotić", "523148979");
         userService.save(milica);
 

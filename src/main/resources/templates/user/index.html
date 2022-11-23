@@ -7,7 +7,12 @@
 </head>
 <body>
 <div class="container m-5">
-    <h2 class="">Users</h2>
+    <div class="d-flex align-items-center justify-content-between">
+        <h2 class="clickable pe-auto" th:text="'Users'">Users</h2>
+        <a class="btn btn-success" th:text="'open-api'" href="#"
+           th:href="@{'webjars/swagger-ui/index.html#/user-endpoint-controller'}">open-api</a>
+    </div>
+
     <table class="table">
         <thead>
         <tr>
@@ -20,17 +25,26 @@
         <tbody>
         <tr th:each="user : ${users}">
             <th scope="row" th:text="${user.id}">1</th>
-            <td th:text="${user.firstName}">Mark</td>
-            <td th:text="${user.lastName}">Otto</td>
+            <td th:text="${user.firstName}">Peter</td>
+            <td th:text="${user.lastName}">Parker</td>
             <td th:text="${user.oib}">1111111111</td>
         </tr>
         </tbody>
     </table>
     <div>
-        <a class="btn btn-primary" th:text="'Add user'" href="#" th:href="@{'/user/create_user'}">Add user</a>
+        <a class="btn btn-primary " th:text="'Add user'" href="#" th:href="@{'/user/create_user'}">Add user</a>
     </div>
 </div>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    $(".clickable").click(function () {
+        window.open("/api/user");
+    });
+    $('.clickable').hover(function () {
+        $(this).css('cursor', 'pointer');
+    });
+</script>
 </body>
 </html>
