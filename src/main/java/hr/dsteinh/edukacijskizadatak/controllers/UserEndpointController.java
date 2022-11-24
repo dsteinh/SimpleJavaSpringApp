@@ -27,11 +27,7 @@ public class UserEndpointController {
     @GetMapping("/{id}")
     public ResponseEntity<User> findUserById(@PathVariable(value = "id") long id) {
         Optional<User> user = userService.findById(id);
-        if (user.isPresent()) {
-            return ResponseEntity.ok().body(user.get());
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+        return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
