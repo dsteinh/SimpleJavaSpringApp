@@ -9,18 +9,16 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-//import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class UserEndpointControllerTest {
 
@@ -60,10 +58,6 @@ class UserEndpointControllerTest {
         User user = new User();
         user.setId(1L);
 
-        List<User> users = new ArrayList<>();
-        users.add(user);
-
-
         when(userService.findById(1L)).thenReturn(Optional.of(user));
 
         mockMvc.perform(get("/api/user/1"))
@@ -80,7 +74,7 @@ class UserEndpointControllerTest {
 
         mockMvc.perform(post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{ \"firstName\": \"\", \"lastName\": \"\", \"oib\": \"\" }"))
+                        .content("{ \"firstName\": \"test\", \"lastName\": \"test\", \"oib\": \"test\" }"))
                 .andExpect(status().isOk());
     }
 }

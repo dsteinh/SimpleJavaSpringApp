@@ -4,8 +4,9 @@ import hr.dsteinh.edukacijskizadatak.model.User;
 import hr.dsteinh.edukacijskizadatak.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class UserController {
@@ -27,9 +28,8 @@ public class UserController {
     }
 
     @PostMapping("/user/create_user")
-    public RedirectView saveNewUser(@ModelAttribute User newUser) {
-        System.out.println(newUser);
+    public String saveNewUser(@ModelAttribute User newUser) {
         userService.save(newUser);
-        return new RedirectView("index");
+        return "redirect:/user/index";
     }
 }
