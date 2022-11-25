@@ -16,8 +16,7 @@ import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 class UserEndpointControllerTest {
@@ -69,12 +68,25 @@ class UserEndpointControllerTest {
         User user = new User();
         user.setId(1L);
 
-
-        when(userService.save(user)).thenReturn(any(User.class));
+        when(userService.createOrUpdateUser(user)).thenReturn(any(User.class));
 
         mockMvc.perform(post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{ \"firstName\": \"test\", \"lastName\": \"test\", \"oib\": \"test\" }"))
                 .andExpect(status().isOk());
     }
+
+   @Test
+    void deleteUserById() throws Exception {
+
+        mockMvc.perform(delete("/api/user/1"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void testDeleteUserById() throws Exception {
+        mockMvc.perform(delete("/api/user/1"))
+                .andExpect(status().isNotFound());
+    }
+
 }

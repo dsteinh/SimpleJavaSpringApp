@@ -2,6 +2,7 @@ package hr.dsteinh.edukacijskizadatak.controllers;
 
 import hr.dsteinh.edukacijskizadatak.model.User;
 import hr.dsteinh.edukacijskizadatak.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,8 +32,19 @@ public class UserEndpointController {
     }
 
     @PostMapping
-    public User saveUser(@Validated @RequestBody User user) {
-        return userService.save(user);
+    public User createOrUpdateUser(@Validated @RequestBody User user) {
+        return userService.createOrUpdateUser(user);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUserById(@PathVariable(value = "id") long id) {
+        if (userService.existsById(id)) {
+            userService.deleteUserById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>("id is not found", HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
 

@@ -14,13 +14,13 @@ public class TestDataInit implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         User tony = new User("Tony", "Stark", "3000");
-        userService.save(tony);
+        userService.createOrUpdateUser(tony);
         User steve = new User("Steve", "Rogers", "9875311122");
-        userService.save(steve);
+        userService.createOrUpdateUser(steve);
         User milica = new User("Milica", "Krmpotić", "523148979");
-        userService.save(milica);
+        userService.createOrUpdateUser(milica);
 
     }
 }

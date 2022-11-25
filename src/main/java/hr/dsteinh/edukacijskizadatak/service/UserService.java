@@ -15,11 +15,22 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public Iterable<User> findAll(){
+    public Iterable<User> findAll() {
         return userRepo.findAll();
     }
-    public User save(User user){
+
+    public User createOrUpdateUser(User user) {
         return userRepo.save(user);
     }
-    public Optional<User> findById(Long id){return  userRepo.findById(id);}
+
+    public Optional<User> findById(Long id) {
+        return userRepo.findById(id);
+    }
+
+    public void deleteUserById(Long id) {
+        userRepo.deleteById(id);
+    }
+    public boolean existsById(Long id){
+        return userRepo.existsById(id);
+    }
 }
