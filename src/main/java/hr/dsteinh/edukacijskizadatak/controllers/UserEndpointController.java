@@ -37,13 +37,12 @@ public class UserEndpointController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUserById(@PathVariable(value = "id") long id) {
-        if (userService.existsById(id)) {
-            userService.deleteUserById(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("id is not found", HttpStatus.NOT_FOUND);
+    public HttpStatus deleteUserById(@PathVariable(value = "id") long id) {
+        if (userService.findById(id).isEmpty()) {
+            return HttpStatus.NOT_FOUND;
         }
+        userService.deleteUserById(id);
+        return HttpStatus.OK;
     }
 
 }

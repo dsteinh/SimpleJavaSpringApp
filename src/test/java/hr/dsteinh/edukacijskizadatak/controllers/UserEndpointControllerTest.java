@@ -45,7 +45,6 @@ class UserEndpointControllerTest {
         List<User> users = new ArrayList<>();
         users.add(user);
 
-
         when(userService.findAll()).thenReturn(users);
 
         mockMvc.perform(get("/api/user"))
@@ -64,7 +63,15 @@ class UserEndpointControllerTest {
     }
 
     @Test
-    void saveUser() throws Exception {
+    void createUser() throws Exception {
+        mockMvc.perform(post("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("{\"id\": 1, \"firstName\": \"test\", \"lastName\": \"test\", \"oib\": \"test\" }"))
+                .andExpect(status().isOk());
+    }
+
+    @Test
+    void updateUser() throws Exception {
         User user = new User();
         user.setId(1L);
 
@@ -76,17 +83,11 @@ class UserEndpointControllerTest {
                 .andExpect(status().isOk());
     }
 
-   @Test
+    @Test
     void deleteUserById() throws Exception {
 
-        mockMvc.perform(delete("/api/user/1"))
+        mockMvc.perform(delete("/api/user/2"))
                 .andExpect(status().isOk());
-    }
 
-    @Test
-    void testDeleteUserById() throws Exception {
-        mockMvc.perform(delete("/api/user/1"))
-                .andExpect(status().isNotFound());
     }
-
 }
