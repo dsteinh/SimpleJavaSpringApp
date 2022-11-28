@@ -4,6 +4,7 @@ import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import hr.dsteinh.edukacijskizadatak.repos.UserRepo;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -15,7 +16,7 @@ public class UserService {
         this.userRepo = userRepo;
     }
 
-    public Iterable<User> findAll() {
+    public List<User> findAll() {
         return userRepo.findAll();
     }
 

@@ -45,7 +45,7 @@ public class TestDataInit implements CommandLineRunner {
         book.setDescription("Dragons!");
 
 
-        bookService.createOrUpdateBook(book);
+        bookService.createOrUpdate(book);
 
         Book book2 = new Book();
         book2.setIsbn("2222222222");
@@ -56,7 +56,7 @@ public class TestDataInit implements CommandLineRunner {
         book2.setPrice(55.5);
         book2.setDescription("And my axe!");
 
-        bookService.createOrUpdateBook(book2);
+        bookService.createOrUpdate(book2);
 
         Book book3 = new Book();
         book3.setIsbn("3333333333");
@@ -67,7 +67,7 @@ public class TestDataInit implements CommandLineRunner {
         book3.setPrice(66.6);
         book3.setDescription("Write better code!");
 
-        bookService.createOrUpdateBook(book3);
+        bookService.createOrUpdate(book3);
     }
 
     private void loadMockPublishers() {

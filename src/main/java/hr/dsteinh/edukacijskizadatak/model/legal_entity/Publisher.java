@@ -1,5 +1,6 @@
 package hr.dsteinh.edukacijskizadatak.model.legal_entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,11 +17,16 @@ import java.util.List;
 @NoArgsConstructor
 public class Publisher extends LegalEntity {
     private String name;
+    @JsonIgnore
     @OneToMany(mappedBy = "publisher")
     private List<Book> books = new ArrayList<>();
 
     public Publisher(String name, String oib) {
         super.setOib(oib);
         this.name = name;
+    }
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }

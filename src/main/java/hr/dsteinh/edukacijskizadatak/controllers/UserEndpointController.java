@@ -21,12 +21,12 @@ public class UserEndpointController {
     }
 
     @GetMapping
-    public List<User> findAllUsers() {
-        return (List<User>) userService.findAll();
+    public List<User> findAll() {
+        return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> findUserById(@PathVariable(value = "id") long id) {
+    public ResponseEntity<User> findById(@PathVariable(value = "id") long id) {
         Optional<User> user = userService.findById(id);
         return user.map(value -> ResponseEntity.ok().body(value)).orElseGet(() -> ResponseEntity.notFound().build());
     }
@@ -37,7 +37,7 @@ public class UserEndpointController {
     }
 
     @DeleteMapping("/{id}")
-    public HttpStatus deleteUserById(@PathVariable(value = "id") long id) {
+    public HttpStatus deleteById(@PathVariable(value = "id") long id) {
         if (userService.findById(id).isEmpty()) {
             return HttpStatus.NOT_FOUND;
         }

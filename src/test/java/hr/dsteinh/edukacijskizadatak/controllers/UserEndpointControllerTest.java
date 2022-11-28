@@ -66,7 +66,7 @@ class UserEndpointControllerTest {
     void createUser() throws Exception {
         mockMvc.perform(post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"id\": 1, \"firstName\": \"test\", \"lastName\": \"test\", \"oib\": \"test\" }"))
+                        .content("{\"firstName\": \"test\", \"lastName\": \"test\", \"oib\": \"test\" }"))
                 .andExpect(status().isOk());
     }
 
@@ -79,7 +79,7 @@ class UserEndpointControllerTest {
 
         mockMvc.perform(post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{ \"firstName\": \"test\", \"lastName\": \"test\", \"oib\": \"test\" }"))
+                        .content("{ \"id\": 1,\"firstName\": \"test\", \"lastName\": \"test\", \"oib\": \"test\" }"))
                 .andExpect(status().isOk());
     }
 

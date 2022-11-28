@@ -1,5 +1,6 @@
 package hr.dsteinh.edukacijskizadatak.model.legal_entity.person;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +16,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 public class Writer extends Person {
+    @JsonIgnore
     @OneToMany(mappedBy = "writer")
     private List<Book> books = new ArrayList<>();
 
@@ -22,5 +24,10 @@ public class Writer extends Person {
         super.setFirstName(fName);
         super.setLastName(lName);
         super.setOib(oib);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString();
     }
 }
