@@ -32,7 +32,7 @@ public class UserEndpointController {
     }
 
     @PostMapping
-    public User createOrUpdateUser(@Validated @RequestBody User user) {
+    public User save(@Validated @RequestBody User user) {
         return userService.save(user);
     }
 

@@ -23,7 +23,7 @@ public class BookController {
         return bookService.findAll();
     }
     @PostMapping
-    public Book createOrUpdate(@Validated @RequestBody Book book) {
+    public Book save(@Validated @RequestBody Book book) {
         return bookService.save(book);
     }
     @GetMapping("/{id}")

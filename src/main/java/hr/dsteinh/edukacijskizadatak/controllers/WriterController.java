@@ -25,7 +25,7 @@ public class WriterController {
     }
 
     @PostMapping
-    public Writer createOrUpdate(@Validated @RequestBody Writer writer) {
+    public Writer save(@Validated @RequestBody Writer writer) {
         return writerService.save(writer);
     }
     @GetMapping("/{id}")
