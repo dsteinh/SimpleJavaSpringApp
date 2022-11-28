@@ -29,7 +29,7 @@ public class UserController {
 
     @PostMapping("/user/create_user")
     public String saveNewUser(@ModelAttribute User newUser) {
-        userService.createOrUpdateUser(newUser);
+        userService.save(newUser);
         return "redirect:/user/index";
     }
 }

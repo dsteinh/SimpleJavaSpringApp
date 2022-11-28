@@ -20,7 +20,7 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public User createOrUpdateUser(User person) {
+    public User save(User person) {
         return userRepo.save(person);
     }
 
@@ -28,7 +28,7 @@ public class UserService {
         return userRepo.findById(id);
     }
 
-    public void deletePersonById(Long id) {
+    public void deleteById(Long id) {
         userRepo.deleteById(id);
     }
 

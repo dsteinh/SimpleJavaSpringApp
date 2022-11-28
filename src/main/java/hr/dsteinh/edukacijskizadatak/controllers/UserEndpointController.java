@@ -33,7 +33,7 @@ public class UserEndpointController {
 
     @PostMapping
     public User createOrUpdateUser(@Validated @RequestBody User user) {
-        return userService.createOrUpdateUser(user);
+        return userService.save(user);
     }
 
     @DeleteMapping("/{id}")
@@ -41,7 +41,7 @@ public class UserEndpointController {
         if (userService.findById(id).isEmpty()) {
             return HttpStatus.NOT_FOUND;
         }
-        userService.deletePersonById(id);
+        userService.deleteById(id);
         return HttpStatus.OK;
     }
 

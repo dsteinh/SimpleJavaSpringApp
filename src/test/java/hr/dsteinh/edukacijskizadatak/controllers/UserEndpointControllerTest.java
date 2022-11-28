@@ -75,7 +75,7 @@ class UserEndpointControllerTest {
         User user = new User();
         user.setId(1L);
 
-        when(userService.createOrUpdateUser(user)).thenReturn(any(User.class));
+        when(userService.save(user)).thenReturn(any(User.class));
 
         mockMvc.perform(post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON)

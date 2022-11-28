@@ -92,10 +92,10 @@ public class TestDataInit implements CommandLineRunner {
 
     private void loadMockUsers() {
         User tony = new User("Tony", "Stark", "3000");
-        userService.createOrUpdateUser(tony);
+        userService.save(tony);
         User steve = new User("Steve", "Rogers", "9875311122");
-        userService.createOrUpdateUser(steve);
+        userService.save(steve);
         User milica = new User("Milica", "Krmpotić", "523148979");
-        userService.createOrUpdateUser(milica);
+        userService.save(milica);
     }
 }
