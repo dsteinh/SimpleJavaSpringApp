@@ -81,11 +81,11 @@ public class TestDataInit implements CommandLineRunner {
 
     private void loadMockWriters() {
         Writer george = new Writer("George R.R.", "Martin", "12345212");
-        writerService.createOrUpdateWriter(george);
+        writerService.createOrUpdate(george);
         Writer tolken = new Writer("J. R. R.", "Tolken", "5834950743");
-        writerService.createOrUpdateWriter(tolken);
+        writerService.createOrUpdate(tolken);
         Writer robert = new Writer("Robert Cecil", "Martin", "523148979");
-        writerService.createOrUpdateWriter(robert);
+        writerService.createOrUpdate(robert);
 
         System.out.println("bla");
     }
