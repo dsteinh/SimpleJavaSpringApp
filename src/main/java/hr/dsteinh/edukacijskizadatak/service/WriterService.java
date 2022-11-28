@@ -18,7 +18,7 @@ public class WriterService{
         return writerRepo.findAll();
     }
 
-    public Writer createOrUpdate(Writer writer) {
+    public Writer save(Writer writer) {
         return writerRepo.save(writer);
     }
     public Optional<Writer> findById(Long id) {

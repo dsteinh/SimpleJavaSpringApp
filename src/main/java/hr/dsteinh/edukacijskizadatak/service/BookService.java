@@ -19,7 +19,7 @@ public class BookService {
         return bookRepo.findAll();
     }
 
-    public Book createOrUpdate(Book book) {
+    public Book save(Book book) {
         return bookRepo.save(book);
     }
 

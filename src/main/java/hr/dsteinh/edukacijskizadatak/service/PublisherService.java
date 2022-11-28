@@ -14,7 +14,7 @@ public class PublisherService{
         this.publisherRepo = publisherRepo;
     }
 
-    public Publisher createOrUpdatePublisher(Publisher publisher) {
+    public Publisher save(Publisher publisher) {
         return publisherRepo.save(publisher);
     }
 

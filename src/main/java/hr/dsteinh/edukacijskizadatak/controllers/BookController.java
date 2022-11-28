@@ -24,7 +24,7 @@ public class BookController {
     }
     @PostMapping
     public Book createOrUpdate(@Validated @RequestBody Book book) {
-        return bookService.createOrUpdate(book);
+        return bookService.save(book);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Book> findById(@PathVariable(value = "id") long id) {

@@ -77,7 +77,7 @@ class BookControllerTest {
         Book book = new Book();
         book.setId(1L);
 
-        when(bookService.createOrUpdate(book)).thenReturn(any(Book.class));
+        when(bookService.save(book)).thenReturn(any(Book.class));
 
         mockMvc.perform(post("/api/book")
                         .contentType(MediaType.APPLICATION_JSON)

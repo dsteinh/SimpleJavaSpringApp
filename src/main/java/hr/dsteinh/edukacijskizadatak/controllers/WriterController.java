@@ -26,7 +26,7 @@ public class WriterController {
 
     @PostMapping
     public Writer createOrUpdate(@Validated @RequestBody Writer writer) {
-        return writerService.createOrUpdate(writer);
+        return writerService.save(writer);
     }
     @GetMapping("/{id}")
     public ResponseEntity<Writer> findById(@PathVariable(value = "id") long id) {

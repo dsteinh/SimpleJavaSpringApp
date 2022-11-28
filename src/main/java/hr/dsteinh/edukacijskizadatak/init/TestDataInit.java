@@ -45,7 +45,7 @@ public class TestDataInit implements CommandLineRunner {
         book.setDescription("Dragons!");
 
 
-        bookService.createOrUpdate(book);
+        bookService.save(book);
 
         Book book2 = new Book();
         book2.setIsbn("2222222222");
@@ -56,7 +56,7 @@ public class TestDataInit implements CommandLineRunner {
         book2.setPrice(55.5);
         book2.setDescription("And my axe!");
 
-        bookService.createOrUpdate(book2);
+        bookService.save(book2);
 
         Book book3 = new Book();
         book3.setIsbn("3333333333");
@@ -67,25 +67,25 @@ public class TestDataInit implements CommandLineRunner {
         book3.setPrice(66.6);
         book3.setDescription("Write better code!");
 
-        bookService.createOrUpdate(book3);
+        bookService.save(book3);
     }
 
     private void loadMockPublishers() {
         Publisher pub1 = new Publisher("Knjiga d.o.o", "5632892");
-        publisherService.createOrUpdatePublisher(pub1);
+        publisherService.save(pub1);
         Publisher pub2 = new Publisher("Objavim d.o.o", "798423098");
-        publisherService.createOrUpdatePublisher(pub2);
+        publisherService.save(pub2);
         Publisher pub3 = new Publisher("Čitaj d.o.o", "08642135");
-        publisherService.createOrUpdatePublisher(pub3);
+        publisherService.save(pub3);
     }
 
     private void loadMockWriters() {
         Writer george = new Writer("George R.R.", "Martin", "12345212");
-        writerService.createOrUpdate(george);
+        writerService.save(george);
         Writer tolken = new Writer("J. R. R.", "Tolken", "5834950743");
-        writerService.createOrUpdate(tolken);
+        writerService.save(tolken);
         Writer robert = new Writer("Robert Cecil", "Martin", "523148979");
-        writerService.createOrUpdate(robert);
+        writerService.save(robert);
 
         System.out.println("bla");
     }
