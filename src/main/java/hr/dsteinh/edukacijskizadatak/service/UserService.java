@@ -1,6 +1,6 @@
 package hr.dsteinh.edukacijskizadatak.service;
 
-import hr.dsteinh.edukacijskizadatak.model.User;
+import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import hr.dsteinh.edukacijskizadatak.repos.UserRepo;
 import org.springframework.stereotype.Service;
 
@@ -19,18 +19,16 @@ public class UserService {
         return userRepo.findAll();
     }
 
-    public User createOrUpdateUser(User user) {
-        return userRepo.save(user);
+    public User createOrUpdateUser(User person) {
+        return userRepo.save(person);
     }
 
     public Optional<User> findById(Long id) {
         return userRepo.findById(id);
     }
 
-    public void deleteUserById(Long id) {
+    public void deletePersonById(Long id) {
         userRepo.deleteById(id);
     }
-    public boolean existsById(Long id){
-        return userRepo.existsById(id);
-    }
+
 }

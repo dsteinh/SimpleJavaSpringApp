@@ -1,6 +1,6 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
-import hr.dsteinh.edukacijskizadatak.model.User;
+import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import hr.dsteinh.edukacijskizadatak.service.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

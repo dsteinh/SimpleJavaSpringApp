@@ -1,6 +1,6 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
-import hr.dsteinh.edukacijskizadatak.model.User;
+import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import hr.dsteinh.edukacijskizadatak.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -41,7 +41,7 @@ public class UserEndpointController {
         if (userService.findById(id).isEmpty()) {
             return HttpStatus.NOT_FOUND;
         }
-        userService.deleteUserById(id);
+        userService.deletePersonById(id);
         return HttpStatus.OK;
     }
 

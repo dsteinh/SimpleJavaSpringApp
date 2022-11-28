@@ -1,7 +1,6 @@
-package hr.dsteinh.edukacijskizadatak.model;
+package hr.dsteinh.edukacijskizadatak.model.legal_entity.person;
 
 
-import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
