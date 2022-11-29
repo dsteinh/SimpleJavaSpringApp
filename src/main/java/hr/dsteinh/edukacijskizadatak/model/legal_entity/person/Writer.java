@@ -20,7 +20,7 @@ public class Writer extends Person {
     private Long id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "writer")
+    @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER)
     private List<Book> books = new ArrayList<>();
 
     public Writer(String fName, String lName, String oib) {
@@ -28,6 +28,7 @@ public class Writer extends Person {
         super.setLastName(lName);
         super.setOib(oib);
     }
+
 
     @Override
     public String toString() {

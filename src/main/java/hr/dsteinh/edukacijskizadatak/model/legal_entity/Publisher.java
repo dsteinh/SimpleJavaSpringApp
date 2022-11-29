@@ -19,8 +19,9 @@ public class Publisher extends LegalEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "publisher")
+    @OneToMany(mappedBy = "publisher", fetch = FetchType.EAGER)
     private List<Book> books = new ArrayList<>();
 
     public Publisher(String name, String oib) {

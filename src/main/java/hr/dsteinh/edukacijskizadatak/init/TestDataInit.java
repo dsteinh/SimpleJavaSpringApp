@@ -1,3 +1,4 @@
+
 package hr.dsteinh.edukacijskizadatak.init;
 
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
@@ -38,8 +39,8 @@ public class TestDataInit implements CommandLineRunner {
         Book book = new Book();
         book.setIsbn("1111111111");
         book.setName("Song of Ice and Fire");
-        book.setPublisher(publisherService.findById(7L).get());
-        book.setWriter(writerService.findById(4L).get());
+        book.setPublisher(publisherService.findAll().get(0));
+        book.setWriter(writerService.findAll().get(0));
         book.setQuantity(12);
         book.setPrice(45.5);
         book.setDescription("Dragons!");
@@ -50,8 +51,8 @@ public class TestDataInit implements CommandLineRunner {
         Book book2 = new Book();
         book2.setIsbn("2222222222");
         book2.setName("Lord of the rings");
-        book2.setPublisher(publisherService.findById(8L).get());
-        book2.setWriter(writerService.findById(5L).get());
+        book2.setPublisher(publisherService.findAll().get(1));
+        book2.setWriter(writerService.findAll().get(1));
         book2.setQuantity(100);
         book2.setPrice(55.5);
         book2.setDescription("And my axe!");
@@ -61,8 +62,8 @@ public class TestDataInit implements CommandLineRunner {
         Book book3 = new Book();
         book3.setIsbn("3333333333");
         book3.setName("Clean code");
-        book3.setPublisher(publisherService.findById(9L).get());
-        book3.setWriter(writerService.findById(6L).get());
+        book3.setPublisher(publisherService.findAll().get(2));
+        book3.setWriter(writerService.findAll().get(2));
         book3.setQuantity(90);
         book3.setPrice(66.6);
         book3.setDescription("Write better code!");
@@ -99,3 +100,5 @@ public class TestDataInit implements CommandLineRunner {
         userService.save(milica);
     }
 }
+
+

@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -19,12 +20,22 @@ public class Book extends Product {
     private Long id;
 
     private String isbn;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Writer writer;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Publisher publisher;
     @JsonIgnore
     @OneToMany(mappedBy = "book")
-    private List<Rent> rents;
+    private List<Rent> rents = new ArrayList<>();
+
+    public void setWriter(Writer writer) {
+        this.writer = writer;
+        writer.getBooks().add(this);
+    }
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+        publisher.getBooks().add(this);
+    }
+
 }

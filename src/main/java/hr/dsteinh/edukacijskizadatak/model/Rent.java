@@ -19,9 +19,9 @@ public class Rent {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private Book book = new Book();
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User user = new User();
 
     private double totalAmount;
@@ -31,5 +31,9 @@ public class Rent {
     @DateTimeFormat(fallbackPatterns = {"M/d/yy", "dd.MM.yyyy"})
     private Date returnDate;
 
+    public void setBook(Book book) {
+        this.book = book;
+        book.getRents().add(this);
+    }
 
 }
