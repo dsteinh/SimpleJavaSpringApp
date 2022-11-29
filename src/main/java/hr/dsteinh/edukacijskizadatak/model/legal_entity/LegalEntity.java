@@ -1,6 +1,5 @@
 package hr.dsteinh.edukacijskizadatak.model.legal_entity;
 
-import hr.dsteinh.edukacijskizadatak.model.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class LegalEntity extends BaseEntity {
+public abstract class LegalEntity {
     @NotBlank
     private String oib;
 }
