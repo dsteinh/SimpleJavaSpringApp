@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -118,5 +119,14 @@ class BookControllerTest {
         mockMvc.perform(delete("/api/book/2"))
                 .andExpect(status().isOk());
 
+    }
+
+    @Test
+    void findByIsbn() throws Exception {
+        String isbn = "1617294136";
+        when(bookService.findByIsbn(isbn)).thenReturn((any(ResponseEntity.class)));
+
+        mockMvc.perform((get("/api/book/search/"+isbn)))
+                .andExpect(status().isOk());
     }
 }

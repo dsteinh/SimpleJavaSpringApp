@@ -26,9 +26,9 @@ public class Rent {
 
     private double totalAmount;
 
-    @DateTimeFormat(fallbackPatterns = {"M/d/yy", "dd.MM.yyyy"})
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date rentDate;
-    @DateTimeFormat(fallbackPatterns = {"M/d/yy", "dd.MM.yyyy"})
+    @DateTimeFormat(pattern = "dd.MM.yyyy")
     private Date returnDate;
 
     public void setBook(Book book) {
