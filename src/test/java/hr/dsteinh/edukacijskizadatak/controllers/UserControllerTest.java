@@ -19,12 +19,12 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class UserEndpointControllerTest {
+class UserControllerTest {
 
     @Mock
     UserService userService;
 
-    UserEndpointController controller;
+    UserController controller;
 
     MockMvc mockMvc;
 
@@ -32,7 +32,7 @@ class UserEndpointControllerTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        controller = new UserEndpointController(userService);
+        controller = new UserController(userService);
         mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
     }
 

@@ -13,6 +13,7 @@ import javax.validation.constraints.NotBlank;
 public abstract class LegalEntity {
     @NotBlank
     private String oib;
+
 }
 
 

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+
+    <changeSet id="1669921896924-1" author="Dodo (generated)">
+        <createSequence incrementBy="1" sequenceName="hibernate_sequence" startValue="1"/>
+    </changeSet>
+    <changeSet id="1669921896924-2" author="Dodo (generated)">
+        <createTable tableName="book">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_book"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="price" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="quantity" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(255)"/>
+            <column name="isbn" type="VARCHAR(255)"/>
+            <column name="writer_id" type="BIGINT"/>
+            <column name="publisher_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1669921896924-3" author="Dodo (generated)">
+        <createTable tableName="publisher">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_publisher"/>
+            </column>
+            <column name="oib" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1669921896924-4" author="Dodo (generated)">
+        <createTable tableName="rent">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_rent"/>
+            </column>
+            <column name="book_id" type="BIGINT"/>
+            <column name="user_id" type="BIGINT"/>
+            <column name="total_amount" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="rent_date" type="DATETIME"/>
+            <column name="return_date" type="DATETIME"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1669921896924-5" author="Dodo (generated)">
+        <createTable tableName="user_table">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_user_table"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="oib" type="VARCHAR(255)"/>
+            <column name="rent_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1669921896924-6" author="Dodo (generated)">
+        <createTable tableName="writer">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_writer"/>
+            </column>
+            <column name="first_name" type="VARCHAR(255)"/>
+            <column name="last_name" type="VARCHAR(255)"/>
+            <column name="oib" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet id="1669921896924-7" author="Dodo (generated)">
+        <addForeignKeyConstraint baseColumnNames="publisher_id" baseTableName="book"
+                                 constraintName="FK_BOOK_ON_PUBLISHER" referencedColumnNames="id"
+                                 referencedTableName="publisher"/>
+    </changeSet>
+    <changeSet id="1669921896924-8" author="Dodo (generated)">
+        <addForeignKeyConstraint baseColumnNames="writer_id" baseTableName="book" constraintName="FK_BOOK_ON_WRITER"
+                                 referencedColumnNames="id" referencedTableName="writer"/>
+    </changeSet>
+    <changeSet id="1669921896924-9" author="Dodo (generated)">
+        <addForeignKeyConstraint baseColumnNames="book_id" baseTableName="rent" constraintName="FK_RENT_ON_BOOK"
+                                 referencedColumnNames="id" referencedTableName="book"/>
+    </changeSet>
+    <changeSet id="1669921896924-10" author="Dodo (generated)">
+        <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="rent" constraintName="FK_RENT_ON_USER"
+                                 referencedColumnNames="id" referencedTableName="user_table"/>
+    </changeSet>
+    <changeSet id="1669921896924-11" author="Dodo (generated)">
+        <addForeignKeyConstraint baseColumnNames="rent_id" baseTableName="user_table"
+                                 constraintName="FK_USER_TABLE_ON_RENT" referencedColumnNames="id"
+                                 referencedTableName="rent"/>
+    </changeSet>
+</databaseChangeLog>
