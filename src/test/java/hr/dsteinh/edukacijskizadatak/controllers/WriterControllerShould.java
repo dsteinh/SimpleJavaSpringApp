@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class WriterControllerTest {
+class WriterControllerShould {
 
 
     @Mock
@@ -36,7 +36,7 @@ class WriterControllerTest {
     }
 
     @Test
-    void findAll() throws Exception {
+    void findAllWriters() throws Exception {
         Writer writer = new Writer();
         writer.setId(1L);
 
@@ -50,7 +50,7 @@ class WriterControllerTest {
     }
 
     @Test
-    void createOrUpdate() throws Exception {
+    void saveWriter() throws Exception {
         mockMvc.perform(post("/api/writer")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -64,7 +64,7 @@ class WriterControllerTest {
     }
 
     @Test
-    void findById() throws Exception {
+    void findWriterById() throws Exception {
         Writer writer = new Writer();
         writer.setId(1L);
 
@@ -75,7 +75,7 @@ class WriterControllerTest {
     }
 
     @Test
-    void deleteById() throws Exception {
+    void deleteWriterById() throws Exception {
 
         mockMvc.perform(delete("/api/writer/2"))
                 .andExpect(status().isOk());

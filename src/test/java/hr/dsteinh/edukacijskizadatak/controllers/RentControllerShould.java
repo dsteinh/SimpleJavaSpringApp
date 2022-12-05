@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class RentControllerTest {
+class RentControllerShould {
 
     @Mock
     RentService rentService;
@@ -35,7 +35,7 @@ class RentControllerTest {
     }
 
     @Test
-    void findAll() throws Exception {
+    void findAllRents() throws Exception {
         Rent rent = new Rent();
         rent.setId(1L);
 
@@ -49,7 +49,7 @@ class RentControllerTest {
     }
 
     @Test
-    void save() throws Exception {
+    void saveRant() throws Exception {
         mockMvc.perform(post("/api/rent")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -72,7 +72,7 @@ class RentControllerTest {
     }
 
     @Test
-    void findById() throws Exception {
+    void findRentById() throws Exception {
         Rent rent = new Rent();
         rent.setId(1L);
 
@@ -83,7 +83,7 @@ class RentControllerTest {
     }
 
     @Test
-    void deleteById() throws Exception {
+    void deleteRentById() throws Exception {
         mockMvc.perform(delete("/api/rent/2"))
                 .andExpect(status().isOk());
     }

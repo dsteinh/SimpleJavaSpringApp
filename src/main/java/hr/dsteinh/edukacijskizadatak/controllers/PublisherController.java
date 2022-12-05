@@ -16,7 +16,6 @@ public class PublisherController {
     private final PublisherService publisherService;
 
     public PublisherController(PublisherService publisherService) {
-
         this.publisherService = publisherService;
     }
     @GetMapping

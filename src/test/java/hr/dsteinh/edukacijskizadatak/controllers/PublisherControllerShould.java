@@ -18,7 +18,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class PublisherControllerTest {
+class PublisherControllerShould {
 
     @Mock
     PublisherService publisherService;
@@ -35,7 +35,7 @@ class PublisherControllerTest {
     }
 
     @Test
-    void findAll() throws Exception {
+    void findAllPublishers() throws Exception {
         Publisher publisher = new Publisher();
         publisher.setId(1L);
 
@@ -49,7 +49,7 @@ class PublisherControllerTest {
     }
 
     @Test
-    void save() throws Exception {
+    void savePublisher() throws Exception {
         mockMvc.perform(post("/api/publisher")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
@@ -62,7 +62,7 @@ class PublisherControllerTest {
     }
 
     @Test
-    void findById() throws Exception {
+    void findPublisherById() throws Exception {
         Publisher publisher = new Publisher();
         publisher.setId(1L);
 
@@ -73,7 +73,7 @@ class PublisherControllerTest {
     }
 
     @Test
-    void deleteById() throws Exception {
+    void deletePublisherById() throws Exception {
         mockMvc.perform(delete("/api/publisher/2"))
                 .andExpect(status().isOk());
     }

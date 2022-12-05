@@ -20,7 +20,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-class BookControllerTest {
+class BookControllerShould {
 
     @Mock
     BookService bookService;
@@ -37,7 +37,7 @@ class BookControllerTest {
     }
 
     @Test
-    void findAll() throws Exception {
+    void findAllBooks() throws Exception {
         Book book = new Book();
         book.setId(1L);
 
@@ -103,7 +103,7 @@ class BookControllerTest {
     }
 
     @Test
-    void findById() throws Exception {
+    void findBookById() throws Exception {
         Book book = new Book();
         book.setId(1L);
 
@@ -114,7 +114,7 @@ class BookControllerTest {
     }
 
     @Test
-    void deleteById() throws Exception {
+    void deleteBookById() throws Exception {
 
         mockMvc.perform(delete("/api/book/2"))
                 .andExpect(status().isOk());
@@ -122,7 +122,7 @@ class BookControllerTest {
     }
 
     @Test
-    void findByIsbn() throws Exception {
+    void findBookByIsbn() throws Exception {
         String isbn = "1617294136";
         when(bookService.findByIsbn(isbn)).thenReturn((any(ResponseEntity.class)));
 
