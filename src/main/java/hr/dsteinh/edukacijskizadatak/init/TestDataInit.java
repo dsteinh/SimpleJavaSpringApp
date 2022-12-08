@@ -9,6 +9,7 @@ import hr.dsteinh.edukacijskizadatak.service.BookService;
 import hr.dsteinh.edukacijskizadatak.service.PublisherService;
 import hr.dsteinh.edukacijskizadatak.service.UserService;
 import hr.dsteinh.edukacijskizadatak.service.WriterService;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,9 @@ public class TestDataInit implements CommandLineRunner {
     private final WriterService writerService;
     private final PublisherService publisherService;
     private final BookService bookService;
+
+    @Value("${spring.profiles.active}")
+    private String activeProfile;
 
     public TestDataInit(UserService userService, WriterService writerService, PublisherService publisherService, BookService bookService) {
         this.userService = userService;
@@ -88,7 +92,8 @@ public class TestDataInit implements CommandLineRunner {
         Writer robert = new Writer("Robert Cecil", "Martin", "523148979");
         writerService.save(robert);
 
-        System.out.println("bla");
+
+        System.out.println("Current database is " + activeProfile);
     }
 
     private void loadMockUsers() {

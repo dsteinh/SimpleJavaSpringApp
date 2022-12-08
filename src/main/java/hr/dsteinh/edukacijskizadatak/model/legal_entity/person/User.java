@@ -14,16 +14,26 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User extends Person{
+public class User extends Person {
+
+    //public enum Role {USER, WORKER}
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @ManyToOne
+    @JsonIgnore
+    private Rent rent;
+
+    @JsonIgnore
+    private String username;
+    @JsonIgnore
+    private String password;
+
     public User(String fName, String lName, String oib) {
         super.setFirstName(fName);
         super.setLastName(lName);
         super.setOib(oib);
     }
-    @JsonIgnore
-    @ManyToOne
-    private Rent rent;
 }
