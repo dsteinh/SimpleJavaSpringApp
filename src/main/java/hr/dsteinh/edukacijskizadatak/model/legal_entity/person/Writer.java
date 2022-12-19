@@ -29,6 +29,12 @@ public class Writer extends Person {
         super.setOib(oib);
     }
 
+    public Writer(long id, String fName, String lName, String oib) {
+        this.id = id;
+        super.setFirstName(fName);
+        super.setLastName(lName);
+        super.setOib(oib);
+    }
 
     @Override
     public String toString() {

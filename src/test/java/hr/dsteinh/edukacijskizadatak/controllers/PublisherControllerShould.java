@@ -1,80 +1,87 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
 import hr.dsteinh.edukacijskizadatak.service.PublisherService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WebMvcTest(PublisherController.class)
 class PublisherControllerShould {
 
-    @Mock
+    public static final String TEST_PUBLISHER_JSON = "src/test/resources/test_publisher.json";
+    private static final String API_PUBLISHERS = "/api/publishers";
+    @Autowired
+    MockMvc mockMvc;
+    @MockBean
     PublisherService publisherService;
 
-    PublisherController controller;
-
-    MockMvc mockMvc;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        controller = new PublisherController(publisherService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-    }
+    private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
     void findAllPublishers() throws Exception {
         Publisher publisher = new Publisher();
-        publisher.setId(1L);
-
         List<Publisher> publishers = new ArrayList<>();
+
         publishers.add(publisher);
 
         when(publisherService.findAll()).thenReturn(publishers);
 
-        mockMvc.perform(get("/api/publisher"))
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_PUBLISHERS)
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     void savePublisher() throws Exception {
-        mockMvc.perform(post("/api/publisher")
+        Publisher publisher = new Publisher(1L, "name","1234");
+
+        when(publisherService.save(publisher)).thenReturn(publisher);
+
+        mapper.writeValue(new File(TEST_PUBLISHER_JSON), publisher);
+        String jsonPublisherToString = mapper.writeValueAsString(publisher);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post(API_PUBLISHERS)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                     "id": 0,
-                                     "oib": "string",
-                                     "name": "string"
-                                   }"""))
+                        .content(jsonPublisherToString))
                 .andExpect(status().isOk());
     }
 
     @Test
     void findPublisherById() throws Exception {
-        Publisher publisher = new Publisher();
-        publisher.setId(1L);
+        Publisher publisher = new Publisher(1L, "name","1234");
 
         when(publisherService.findById(1L)).thenReturn(Optional.of(publisher));
 
-        mockMvc.perform(get("/api/publisher/1"))
+        mapper.writeValue(new File(TEST_PUBLISHER_JSON), publisher);
+        String jsonWriterToString = mapper.writeValueAsString(publisher);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_PUBLISHERS + "/1"))
+                .andExpect(content().string(jsonWriterToString))
                 .andExpect(status().isOk());
     }
 
     @Test
     void deletePublisherById() throws Exception {
-        mockMvc.perform(delete("/api/publisher/2"))
+        mockMvc.perform(delete(API_PUBLISHERS + "/2"))
                 .andExpect(status().isOk());
     }
 }

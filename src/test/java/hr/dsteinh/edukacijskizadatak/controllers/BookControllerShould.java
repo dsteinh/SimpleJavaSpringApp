@@ -1,132 +1,106 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
+import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
 import hr.dsteinh.edukacijskizadatak.service.BookService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WebMvcTest(BookController.class)
 class BookControllerShould {
 
-    @Mock
+    public static final String TEST_BOOK_JSON = "src/test/resources/test_book.json";
+
+    public static final String API_BOOKS = "/api/books";
+    @Autowired
+    MockMvc mockMvc;
+    @MockBean
     BookService bookService;
 
-    BookController controller;
+    private final ObjectMapper mapper = new ObjectMapper();
 
-    MockMvc mockMvc;
-
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        controller = new BookController(bookService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-    }
 
     @Test
     void findAllBooks() throws Exception {
         Book book = new Book();
-        book.setId(1L);
-
         List<Book> books = new ArrayList<>();
+
         books.add(book);
 
         when(bookService.findAll()).thenReturn(books);
 
-        mockMvc.perform(get("/api/book"))
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_BOOKS)
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+
     }
 
     @Test
-    void createBook() throws Exception {
-        mockMvc.perform(post("/api/book")
+    void saveBook() throws Exception {
+        Book book = new Book(1L, "123", new Writer(), new Publisher(), new ArrayList<>());
+
+        when(bookService.save(book)).thenReturn(book);
+
+        mapper.writeValue(new File(TEST_BOOK_JSON), book);
+        String jsonBookToString = mapper.writeValueAsString(book);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post(API_BOOKS)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                  "name": "string",
-                                  "price": 0,
-                                  "quantity": 0,
-                                  "description": "string",
-                                  "isbn": "string",
-                                  "writer": {
-                                    "id": 4
-                                 \s
-                                  },
-                                  "publisher": {
-                                    "id": 7
-                                \s
-                                  }
-                                }"""))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void updateBook() throws Exception {
-        Book book = new Book();
-        book.setId(1L);
-
-        when(bookService.save(book)).thenReturn(any(Book.class));
-
-        mockMvc.perform(post("/api/book")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                  "id": 0,
-                                  "name": "string",
-                                  "price": 0,
-                                  "quantity": 0,
-                                  "description": "string",
-                                  "isbn": "string",
-                                  "writer": {
-                                    "id": 4
-                                 \s
-                                  },
-                                  "publisher": {
-                                    "id": 7
-                                \s
-                                  }
-                                }"""))
+                        .content(jsonBookToString))
                 .andExpect(status().isOk());
     }
 
     @Test
     void findBookById() throws Exception {
-        Book book = new Book();
-        book.setId(1L);
+        Book book = new Book(1L, "123", new Writer(), new Publisher(), new ArrayList<>());
 
         when(bookService.findById(1L)).thenReturn(Optional.of(book));
 
-        mockMvc.perform(get("/api/book/1"))
+        mapper.writeValue(new File(TEST_BOOK_JSON), book);
+        String jsonBookToString = mapper.writeValueAsString(book);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_BOOKS + "/1"))
+                .andExpect(content().string(jsonBookToString))
                 .andExpect(status().isOk());
     }
 
     @Test
     void deleteBookById() throws Exception {
-
-        mockMvc.perform(delete("/api/book/2"))
+        mockMvc.perform(delete(API_BOOKS + "/1"))
                 .andExpect(status().isOk());
-
     }
 
     @Test
     void findBookByIsbn() throws Exception {
+        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.OK);
         String isbn = "1617294136";
-        when(bookService.findByIsbn(isbn)).thenReturn((any(ResponseEntity.class)));
 
-        mockMvc.perform((get("/api/book/search/"+isbn)))
+        when(bookService.findByIsbn(isbn)).thenReturn(response);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_BOOKS + "/search/" + isbn))
                 .andExpect(status().isOk());
     }
 }

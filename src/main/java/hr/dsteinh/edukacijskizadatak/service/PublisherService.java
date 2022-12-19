@@ -3,11 +3,13 @@ package hr.dsteinh.edukacijskizadatak.service;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
 import hr.dsteinh.edukacijskizadatak.repos.PublisherRepo;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class PublisherService {
     private final PublisherRepo publisherRepo;
 

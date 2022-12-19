@@ -2,18 +2,17 @@ package hr.dsteinh.edukacijskizadatak.model;
 
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.*;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @Entity
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Rent {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -26,10 +25,8 @@ public class Rent {
 
     private double totalAmount;
 
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private Date rentDate;
-    @DateTimeFormat(pattern = "dd.MM.yyyy")
-    private Date returnDate;
+    private LocalDateTime rentDate;
+    private LocalDateTime returnDate;
 
     public void setBook(Book book) {
         this.book = book;

@@ -2,6 +2,7 @@ package hr.dsteinh.edukacijskizadatak.controllers;
 
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
 import hr.dsteinh.edukacijskizadatak.service.BookService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -11,13 +12,10 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/book")
+@RequestMapping("/api/books")
+@RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
-
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
-    }
 
     @GetMapping
     public List<Book> findAll() {
@@ -45,7 +43,7 @@ public class BookController {
     }
 
     @GetMapping("/search/{isbn}")
-    public ResponseEntity<String> findByIsbn(@PathVariable(name = "isbn") String isbn){
+    public ResponseEntity<String> findByIsbn(@PathVariable(name = "isbn") String isbn) {
         return bookService.findByIsbn(isbn);
     }
 }

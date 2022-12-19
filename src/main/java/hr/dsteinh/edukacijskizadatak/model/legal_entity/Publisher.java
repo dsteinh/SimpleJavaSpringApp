@@ -2,9 +2,7 @@ package hr.dsteinh.edukacijskizadatak.model.legal_entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Publisher extends LegalEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +28,13 @@ public class Publisher extends LegalEntity {
         super.setOib(oib);
         this.name = name;
     }
+
+    public Publisher(Long id, String name, String oib) {
+        super.setOib(oib);
+        this.name = name;
+        this.id = id;
+    }
+
 
     @Override
     public String toString() {

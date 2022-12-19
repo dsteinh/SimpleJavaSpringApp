@@ -1,90 +1,89 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import hr.dsteinh.edukacijskizadatak.model.Rent;
 import hr.dsteinh.edukacijskizadatak.service.RentService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WebMvcTest(RentController.class)
 class RentControllerShould {
 
-    @Mock
-    RentService rentService;
-
-    RentController controller;
-
+    public static final String TEST_RENT_JSON = "src/test/resources/test_rent.json";
+    public static final String API_RENTS = "/api/rents";
+    @Autowired
     MockMvc mockMvc;
+    @MockBean
+    RentService rentService;
+    private final ObjectMapper mapper = new JsonMapper();
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-        controller = new RentController(rentService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-    }
 
     @Test
     void findAllRents() throws Exception {
         Rent rent = new Rent();
-        rent.setId(1L);
-
         List<Rent> rents = new ArrayList<>();
+
         rents.add(rent);
 
         when(rentService.findAll()).thenReturn(rents);
 
-        mockMvc.perform(get("/api/rent"))
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_RENTS)
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
     @Test
     void saveRant() throws Exception {
-        mockMvc.perform(post("/api/rent")
+        mapper.registerModule(new JavaTimeModule());
+        Rent rent = mapper.readValue(new File(TEST_RENT_JSON), Rent.class);
+
+        when(rentService.save(rent)).thenReturn(rent);
+
+        String string = mapper.writeValueAsString(rent);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post(API_RENTS)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""
-                                {
-                                  "name": "string",
-                                  "price": 0,
-                                  "quantity": 0,
-                                  "description": "string",
-                                  "isbn": "string",
-                                  "writer": {
-                                    "id": 4
-                                 \s
-                                  },
-                                  "publisher": {
-                                    "id": 7
-                                \s
-                                  }
-                                }"""))
+                        .content(string))
                 .andExpect(status().isOk());
     }
 
     @Test
     void findRentById() throws Exception {
-        Rent rent = new Rent();
-        rent.setId(1L);
+        mapper.registerModule(new JavaTimeModule());
+        Rent rent = mapper.readValue(new File(TEST_RENT_JSON), Rent.class);
 
         when(rentService.findById(1L)).thenReturn(Optional.of(rent));
 
-        mockMvc.perform(get("/api/rent/1"))
+        String jsonRentToString = mapper.writeValueAsString(rent);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_RENTS + "/1"))
+                .andExpect(content().string(jsonRentToString))
                 .andExpect(status().isOk());
     }
 
     @Test
     void deleteRentById() throws Exception {
-        mockMvc.perform(delete("/api/rent/2"))
+        mockMvc.perform(delete(API_RENTS + "/2"))
                 .andExpect(status().isOk());
     }
 }

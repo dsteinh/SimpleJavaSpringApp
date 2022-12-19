@@ -1,53 +1,51 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import hr.dsteinh.edukacijskizadatak.service.UserService;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WebMvcTest(UserController.class)
 class UserControllerShould {
 
-    @Mock
-    UserService userService;
-
-    UserController controller;
-
+    public static final String TEST_USER_JSON = "src/test/resources/test_user.json";
+    private static final String API_USERS = "/api/users";
+    @Autowired
     MockMvc mockMvc;
+    @MockBean
+    UserService userService;
+    private final ObjectMapper mapper = new ObjectMapper();
 
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-
-        controller = new UserController(userService);
-        mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-    }
 
     @Test
     void findAllUsers() throws Exception {
 
         User user = new User();
-        user.setId(1L);
-
         List<User> users = new ArrayList<>();
+
         users.add(user);
 
         when(userService.findAll()).thenReturn(users);
 
-        mockMvc.perform(get("/api/user"))
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_USERS)
+                        .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
 
@@ -58,36 +56,34 @@ class UserControllerShould {
 
         when(userService.findById(1L)).thenReturn(Optional.of(user));
 
-        mockMvc.perform(get("/api/user/1"))
+        mapper.writeValue(new File(TEST_USER_JSON), user);
+        String jsonUserToString = mapper.writeValueAsString(user);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .get(API_USERS + "/1"))
+                .andExpect(content().string(jsonUserToString))
                 .andExpect(status().isOk());
     }
 
     @Test
-    void createUser() throws Exception {
-        mockMvc.perform(post("/api/user")
+    void saveUser() throws Exception {
+        User user = new User(1L,"firstname", "lastname", "123");
+
+        when(userService.save(user)).thenReturn(user);
+
+        mapper.writeValue(new File(TEST_USER_JSON), user);
+        String jsonUserToString = mapper.writeValueAsString(user);
+
+        mockMvc.perform(MockMvcRequestBuilders
+                        .post(API_USERS)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("{\"firstName\": \"test\", \"lastName\": \"test\", \"oib\": \"test\" }"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void updateUser() throws Exception {
-        User user = new User();
-        user.setId(1L);
-
-        when(userService.save(user)).thenReturn(any(User.class));
-
-        mockMvc.perform(post("/api/user")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content("{ \"id\": 1,\"firstName\": \"test\", \"lastName\": \"test\", \"oib\": \"test\" }"))
+                        .content(jsonUserToString))
                 .andExpect(status().isOk());
     }
 
     @Test
     void deleteUserById() throws Exception {
-
-        mockMvc.perform(delete("/api/user/2"))
+        mockMvc.perform(delete(API_USERS + "/2"))
                 .andExpect(status().isOk());
-
     }
 }

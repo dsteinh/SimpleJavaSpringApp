@@ -1,0 +1,31 @@
+{
+  "id": 0,
+  "book": {
+    "name": "string",
+    "price": 0,
+    "quantity": 0,
+    "description": "string",
+    "id": 0,
+    "isbn": "string",
+    "writer": {
+      "oib": "string",
+      "firstName": "string",
+      "lastName": "string",
+      "id": 0
+    },
+    "publisher": {
+      "oib": "string",
+      "id": 0,
+      "name": "string"
+    }
+  },
+  "user": {
+    "oib": "string",
+    "firstName": "string",
+    "lastName": "string",
+    "id": 0
+  },
+  "totalAmount": 0,
+  "rentDate": null,
+  "returnDate": null
+}

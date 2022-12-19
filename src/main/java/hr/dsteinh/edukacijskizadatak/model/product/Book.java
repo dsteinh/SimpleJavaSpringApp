@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.dsteinh.edukacijskizadatak.model.Rent;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+import org.jetbrains.annotations.NotNull;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +14,9 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Book extends Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,7 +32,7 @@ public class Book extends Product {
     @OneToMany(mappedBy = "book")
     private List<Rent> rents = new ArrayList<>();
 
-    public void setWriter(Writer writer) {
+    public void setWriter(@NotNull Writer writer) {
         this.writer = writer;
         writer.getBooks().add(this);
     }
