@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(PublisherController.class)
 class PublisherControllerShould {
 
-    public static final String TEST_PUBLISHER_JSON = "src/test/resources/test_publisher.json";
+    public static final String TEST_PUBLISHER_JSON = "src/test/resources/controller/test_publisher.json";
     private static final String API_PUBLISHERS = "/api/publishers";
     @Autowired
     MockMvc mockMvc;

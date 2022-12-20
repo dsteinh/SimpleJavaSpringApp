@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(UserController.class)
 class UserControllerShould {
 
-    public static final String TEST_USER_JSON = "src/test/resources/test_user.json";
+    public static final String TEST_USER_JSON = "src/test/resources/controller/test_user.json";
     private static final String API_USERS = "/api/users";
     @Autowired
     MockMvc mockMvc;

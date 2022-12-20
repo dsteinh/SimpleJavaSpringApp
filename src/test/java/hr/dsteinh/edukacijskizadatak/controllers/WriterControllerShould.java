@@ -24,7 +24,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(WriterController.class)
 class WriterControllerShould {
 
-    public static final String TEST_WRITER_JSON = "src/test/resources/test_writer.json";
+    public static final String TEST_WRITER_JSON = "src/test/resources/controller/test_writer.json";
     private static final String API_WRITERS = "/api/writers";
     @Autowired
     MockMvc mockMvc;

@@ -3,10 +3,7 @@ package hr.dsteinh.edukacijskizadatak.model.legal_entity.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.dsteinh.edukacijskizadatak.model.Rent;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
@@ -15,6 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 public class User extends Person {
 

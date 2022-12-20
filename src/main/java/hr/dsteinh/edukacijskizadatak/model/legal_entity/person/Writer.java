@@ -2,9 +2,7 @@ package hr.dsteinh.edukacijskizadatak.model.legal_entity.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -14,6 +12,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Builder
+@AllArgsConstructor
 public class Writer extends Person {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

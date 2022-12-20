@@ -9,9 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -28,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(BookController.class)
 class BookControllerShould {
 
-    public static final String TEST_BOOK_JSON = "src/test/resources/test_book.json";
+    public static final String TEST_BOOK_JSON = "src/test/resources/controller/test_book.json";
 
     public static final String API_BOOKS = "/api/books";
     @Autowired
@@ -89,18 +87,6 @@ class BookControllerShould {
     @Test
     void deleteBookById() throws Exception {
         mockMvc.perform(delete(API_BOOKS + "/1"))
-                .andExpect(status().isOk());
-    }
-
-    @Test
-    void findBookByIsbn() throws Exception {
-        ResponseEntity<String> response = new ResponseEntity<>(HttpStatus.OK);
-        String isbn = "1617294136";
-
-        when(bookService.findByIsbn(isbn)).thenReturn(response);
-
-        mockMvc.perform(MockMvcRequestBuilders
-                        .get(API_BOOKS + "/search/" + isbn))
                 .andExpect(status().isOk());
     }
 }

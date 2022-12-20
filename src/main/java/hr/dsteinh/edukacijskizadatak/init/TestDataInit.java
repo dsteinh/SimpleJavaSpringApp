@@ -32,10 +32,10 @@ public class TestDataInit implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        loadMockUsers();
+       /* loadMockUsers();
         loadMockWriters();
         loadMockPublishers();
-        loadMockBooks();
+        loadMockBooks();*/
 
     }
 

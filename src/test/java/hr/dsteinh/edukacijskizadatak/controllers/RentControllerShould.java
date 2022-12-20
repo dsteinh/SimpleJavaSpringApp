@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(RentController.class)
 class RentControllerShould {
 
-    public static final String TEST_RENT_JSON = "src/test/resources/test_rent.json";
+    public static final String TEST_RENT_JSON = "src/test/resources/controller/test_rent.json";
     public static final String API_RENTS = "/api/rents";
     @Autowired
     MockMvc mockMvc;

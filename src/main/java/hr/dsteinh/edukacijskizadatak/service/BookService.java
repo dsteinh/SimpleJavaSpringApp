@@ -15,11 +15,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 @Transactional
 public class BookService {
-
-
     private final BookRepo bookRepo;
     private final RestTemplate bookApiRestTemplate;
-
 
     public List<Book> findAll() {
         return bookRepo.findAll();
