@@ -1,9 +1,8 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
+import hr.dsteinh.edukacijskizadatak.mother.BookMother;
 import hr.dsteinh.edukacijskizadatak.service.BookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +38,7 @@ class BookControllerShould {
 
     @Test
     void findAllBooks() throws Exception {
-        Book book = new Book();
+        Book book = BookMother.createBook();
         List<Book> books = new ArrayList<>();
 
         books.add(book);
@@ -55,7 +54,7 @@ class BookControllerShould {
 
     @Test
     void saveBook() throws Exception {
-        Book book = new Book(1L, "123", new Writer(), new Publisher(), new ArrayList<>());
+        Book book = BookMother.createBook();
 
         when(bookService.save(book)).thenReturn(book);
 
@@ -71,7 +70,7 @@ class BookControllerShould {
 
     @Test
     void findBookById() throws Exception {
-        Book book = new Book(1L, "123", new Writer(), new Publisher(), new ArrayList<>());
+        Book book = BookMother.createBook();
 
         when(bookService.findById(1L)).thenReturn(Optional.of(book));
 

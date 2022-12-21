@@ -2,6 +2,7 @@ package hr.dsteinh.edukacijskizadatak.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
+import hr.dsteinh.edukacijskizadatak.mother.WriterMother;
 import hr.dsteinh.edukacijskizadatak.service.WriterService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ class WriterControllerShould {
 
     @Test
     void findAllWriters() throws Exception {
-        Writer writer = new Writer();
+        Writer writer = WriterMother.createWriter();
         List<Writer> writers = new ArrayList<>();
 
         writers.add(writer);
@@ -49,7 +50,7 @@ class WriterControllerShould {
 
     @Test
     void saveWriter() throws Exception {
-        Writer writer = new Writer(1L, "ime", "prezime", "123");
+        Writer writer = WriterMother.createWriter();
 
         when(writerService.save(writer)).thenReturn(writer);
 
@@ -65,7 +66,7 @@ class WriterControllerShould {
 
     @Test
     void findWriterById() throws Exception {
-        Writer writer = new Writer(1L, "ime", "prezime", "123");
+        Writer writer = WriterMother.createWriter();
 
         when(writerService.findById(1L)).thenReturn(Optional.of(writer));
 

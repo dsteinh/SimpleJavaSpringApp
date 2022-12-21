@@ -1,6 +1,7 @@
 package hr.dsteinh.edukacijskizadatak.service;
 
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
+import hr.dsteinh.edukacijskizadatak.mother.WriterMother;
 import hr.dsteinh.edukacijskizadatak.repos.WriterRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ class WriterServiceShould {
     void findAllWriters() {
         //given
         List<Writer> expectedWriters = new ArrayList<>();
-        expectedWriters.add(new Writer());
+        expectedWriters.add(WriterMother.createWriter());
 
         given(writerRepo.findAll()).willReturn(expectedWriters);
 
@@ -41,8 +42,7 @@ class WriterServiceShould {
 
     @Test
     void saveWriter() {
-        long id = 1L;
-        Writer expectedWriter = Writer.builder().id(id).build();
+        Writer expectedWriter = WriterMother.createWriter();
 
         given(writerRepo.save(expectedWriter)).willReturn(expectedWriter);
 
@@ -56,7 +56,7 @@ class WriterServiceShould {
     @Test
     void findWriterById() {
         long id = 1L;
-        Writer expectedWriter = new Writer(id,"name", "lastname", "123");
+        Writer expectedWriter = WriterMother.createWriter();
 
         given(writerRepo.findById(id)).willReturn(Optional.of(expectedWriter));
 

@@ -2,6 +2,7 @@ package hr.dsteinh.edukacijskizadatak.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
+import hr.dsteinh.edukacijskizadatak.mother.PublisherMother;
 import hr.dsteinh.edukacijskizadatak.service.PublisherService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,7 +36,7 @@ class PublisherControllerShould {
 
     @Test
     void findAllPublishers() throws Exception {
-        Publisher publisher = new Publisher();
+        Publisher publisher = PublisherMother.createPublisher();
         List<Publisher> publishers = new ArrayList<>();
 
         publishers.add(publisher);
@@ -50,7 +51,7 @@ class PublisherControllerShould {
 
     @Test
     void savePublisher() throws Exception {
-        Publisher publisher = new Publisher(1L, "name","1234");
+        Publisher publisher = PublisherMother.createPublisher();
 
         when(publisherService.save(publisher)).thenReturn(publisher);
 
@@ -66,7 +67,7 @@ class PublisherControllerShould {
 
     @Test
     void findPublisherById() throws Exception {
-        Publisher publisher = new Publisher(1L, "name","1234");
+        Publisher publisher = PublisherMother.createPublisher();
 
         when(publisherService.findById(1L)).thenReturn(Optional.of(publisher));
 

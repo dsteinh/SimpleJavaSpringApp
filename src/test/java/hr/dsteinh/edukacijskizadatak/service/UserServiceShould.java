@@ -1,6 +1,7 @@
 package hr.dsteinh.edukacijskizadatak.service;
 
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
+import hr.dsteinh.edukacijskizadatak.mother.UserMother;
 import hr.dsteinh.edukacijskizadatak.repos.UserRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ class UserServiceShould {
     void findAllUsers() {
         //given
         List<User> expectedUsers = new ArrayList<>();
-        expectedUsers.add(new User());
+        expectedUsers.add(UserMother.createUser());
 
         given(userRepo.findAll()).willReturn(expectedUsers);
 
@@ -41,8 +42,7 @@ class UserServiceShould {
 
     @Test
     void saveUser() {
-        long id = 1L;
-        User expectedUser = User.builder().id(id).build();
+        User expectedUser = UserMother.createUser();
 
         given(userRepo.save(expectedUser)).willReturn(expectedUser);
 
@@ -56,7 +56,7 @@ class UserServiceShould {
     @Test
     void findByUserId() {
         long id = 1L;
-        User expectedUser = new User(id,"name", "lastname","1234");
+        User expectedUser = UserMother.createUser();
 
         given(userRepo.findById(id)).willReturn(Optional.of(expectedUser));
 

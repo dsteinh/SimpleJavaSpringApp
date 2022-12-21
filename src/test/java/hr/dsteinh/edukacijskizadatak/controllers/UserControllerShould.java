@@ -2,6 +2,7 @@ package hr.dsteinh.edukacijskizadatak.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
+import hr.dsteinh.edukacijskizadatak.mother.UserMother;
 import hr.dsteinh.edukacijskizadatak.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +37,7 @@ class UserControllerShould {
     @Test
     void findAllUsers() throws Exception {
 
-        User user = new User();
+        User user = UserMother.createUser();
         List<User> users = new ArrayList<>();
 
         users.add(user);
@@ -51,7 +52,7 @@ class UserControllerShould {
 
     @Test
     void findUserById() throws Exception {
-        User user = new User();
+        User user = UserMother.createUser();
         user.setId(1L);
 
         when(userService.findById(1L)).thenReturn(Optional.of(user));
@@ -67,7 +68,7 @@ class UserControllerShould {
 
     @Test
     void saveUser() throws Exception {
-        User user = new User(1L,"firstname", "lastname", "123");
+        User user =  UserMother.createUser();
 
         when(userService.save(user)).thenReturn(user);
 

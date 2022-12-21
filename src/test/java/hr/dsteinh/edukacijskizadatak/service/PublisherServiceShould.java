@@ -1,6 +1,7 @@
 package hr.dsteinh.edukacijskizadatak.service;
 
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
+import hr.dsteinh.edukacijskizadatak.mother.PublisherMother;
 import hr.dsteinh.edukacijskizadatak.repos.PublisherRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,29 +29,28 @@ class PublisherServiceShould {
     void findAllPublishers() {
         //given
         List<Publisher> expectedPublishers = new ArrayList<>();
-        expectedPublishers.add(new Publisher());
+        expectedPublishers.add(PublisherMother.createPublisher());
 
         given(publisherRepo.findAll()).willReturn(expectedPublishers);
-
         // When
-        List<Publisher> actualPublishers = publisherService.findAll();
 
+        List<Publisher> actualPublishers = publisherService.findAll();
         // Then
+
         assertEquals(expectedPublishers, actualPublishers);
     }
 
     @Test
     void savePublisher() {
         //given
-        long id = 1L;
-        Publisher expectedPublisher = Publisher.builder().id(id).build();
+        Publisher expectedPublisher = PublisherMother.createPublisher();
 
         given(publisherRepo.save(expectedPublisher)).willReturn(expectedPublisher);
-
         // When
-        Publisher actualPublisher = publisherService.save(expectedPublisher);
 
+        Publisher actualPublisher = publisherService.save(expectedPublisher);
         // Then
+
         assertEquals(expectedPublisher, actualPublisher);
     }
 
@@ -58,7 +58,7 @@ class PublisherServiceShould {
     void findPublisherById() {
         // Given
         long id = 1L;
-        Publisher expectedPublisher = new Publisher(id, "name", "1234");
+        Publisher expectedPublisher = PublisherMother.createPublisher();
 
         given(publisherRepo.findById(id)).willReturn(Optional.of(expectedPublisher));
 
@@ -72,11 +72,11 @@ class PublisherServiceShould {
     @Test
     void deletePublisherById() {
         long id = 1L;
-
         // When
-        publisherService.deleteById(id);
 
+        publisherService.deleteById(id);
         // Then
+
         verify(publisherRepo, times(1)).deleteById(id);
     }
 }

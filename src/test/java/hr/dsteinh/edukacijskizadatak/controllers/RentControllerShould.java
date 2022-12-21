@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import hr.dsteinh.edukacijskizadatak.model.Rent;
+import hr.dsteinh.edukacijskizadatak.mother.RentMother;
 import hr.dsteinh.edukacijskizadatak.service.RentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ class RentControllerShould {
 
     @Test
     void findAllRents() throws Exception {
-        Rent rent = new Rent();
+        Rent rent = RentMother.createRent();
         List<Rent> rents = new ArrayList<>();
 
         rents.add(rent);
