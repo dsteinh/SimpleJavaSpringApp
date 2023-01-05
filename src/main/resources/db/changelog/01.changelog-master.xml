@@ -57,7 +57,6 @@
             <column name="first_name" type="VARCHAR(255)"/>
             <column name="last_name" type="VARCHAR(255)"/>
             <column name="oib" type="VARCHAR(255)"/>
-            <column name="rent_id" type="BIGINT"/>
         </createTable>
     </changeSet>
     <changeSet id="1669921896924-6" author="Dodo (generated)">
@@ -87,9 +86,8 @@
         <addForeignKeyConstraint baseColumnNames="user_id" baseTableName="rent" constraintName="FK_RENT_ON_USER"
                                  referencedColumnNames="id" referencedTableName="user_table"/>
     </changeSet>
-    <changeSet id="1669921896924-11" author="Dodo (generated)">
-        <addForeignKeyConstraint baseColumnNames="rent_id" baseTableName="user_table"
-                                 constraintName="FK_USER_TABLE_ON_RENT" referencedColumnNames="id"
-                                 referencedTableName="rent"/>
-    </changeSet>
+
+    <include file="db/changelog/02.update-user-add-username-password-changelog.xml"/>
+    <include file="db/changelog/03.insert-initial-data.xml"/>
+
 </databaseChangeLog>

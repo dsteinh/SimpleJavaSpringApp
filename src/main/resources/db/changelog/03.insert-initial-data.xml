@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.17.xsd">
+    <changeSet id="13_add_user" author="dodo">
+        <insert tableName="user_table">
+            <column name="id" value="1"/>
+            <column name="oib" value="49549243428"/>
+            <column name="first_name" value="Mirko"/>
+            <column name="last_name" value="Mirkotić"/>
+            <column name="username" value="m_mirko"/>
+            <column name="password" value="********"/>
+        </insert>
+        <insert tableName="user_table">
+            <column name="id" value="2"/>
+            <column name="oib" value="44342895492"/>
+            <column name="first_name" value="Milica"/>
+            <column name="last_name" value="Krmpotić"/>
+            <column name="username" value="m_milica"/>
+            <column name="password" value="********"/>
+        </insert>
+        <insert tableName="user_table">
+            <column name="id" value="3"/>
+            <column name="oib" value="49524342849"/>
+            <column name="first_name" value="Tony"/>
+            <column name="last_name" value="Stark"/>
+            <column name="username" value="mr_stark"/>
+            <column name="password" value="********"/>
+        </insert>
+    </changeSet>
+    <changeSet id="14_add_publisher" author="dodo">
+        <insert tableName="publisher">
+            <column name="id" value="1"/>
+            <column name="oib" value="34449549228"/>
+            <column name="name" value="knjiga d.o.o"/>
+        </insert>
+        <insert tableName="publisher">
+            <column name="id" value="2"/>
+            <column name="oib" value="32844449295"/>
+            <column name="name" value="books d.o.o"/>
+        </insert>
+        <insert tableName="publisher">
+            <column name="id" value="3"/>
+            <column name="oib" value="53449224498"/>
+            <column name="name" value="izdaj d.o.o"/>
+        </insert>
+    </changeSet>
+    <changeSet id="15_add_writer" author="dodo">
+        <insert tableName="writer">
+            <column name="id" value="1"/>
+            <column name="oib" value="4950692849"/>
+            <column name="first_name" value="Uncle"/>
+            <column name="last_name" value="Bob"/>
+        </insert>
+        <insert tableName="writer">
+            <column name="id" value="2"/>
+            <column name="oib" value="9249506849"/>
+            <column name="first_name" value="George R.R."/>
+            <column name="last_name" value="Martin"/>
+        </insert>
+        <insert tableName="writer">
+            <column name="id" value="3"/>
+            <column name="oib" value="4950692849"/>
+            <column name="first_name" value="J. R. R."/>
+            <column name="last_name" value="Tolkien"/>
+        </insert>
+    </changeSet>
+    <changeSet id="16_add_book" author="dodo">
+        <insert tableName="book">
+            <column name="id" value="1"/>
+            <column name="description" value="fnoawfnwaoifwaofiahwfoawihfawo"/>
+            <column name="isbn" value="123412341234"/>
+            <column name="name" value="CleanCode"/>
+            <column name="price" value="13.99"/>
+            <column name="quantity" value="10"/>
+            <column name="publisher_id" value="1"/>
+            <column name="writer_id" value="1"/>
+        </insert>
+    </changeSet>
+    <changeSet id="17_add_rent" author="dodo">
+        <insert tableName="rent">
+            <column name="id" value="1"/>
+            <column name="book_id" value="1"/>
+            <column name="user_id" value="1"/>
+            <column name="total_amount" value="50"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

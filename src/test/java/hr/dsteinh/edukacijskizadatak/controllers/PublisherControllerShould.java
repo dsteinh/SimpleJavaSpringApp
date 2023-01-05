@@ -1,6 +1,7 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
 import hr.dsteinh.edukacijskizadatak.mother.PublisherMother;
 import hr.dsteinh.edukacijskizadatak.service.PublisherService;
@@ -8,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -23,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(PublisherController.class)
+@Import(SecurityConfig.class)
 class PublisherControllerShould {
 
     public static final String TEST_PUBLISHER_JSON = "src/test/resources/controller/test_publisher.json";
@@ -80,9 +84,22 @@ class PublisherControllerShould {
                 .andExpect(status().isOk());
     }
 
+    @WithMockUser(roles = "ADMIN")
     @Test
     void deletePublisherById() throws Exception {
         mockMvc.perform(delete(API_PUBLISHERS + "/2"))
                 .andExpect(status().isOk());
+    }
+    @WithMockUser
+    @Test
+    void notDeleteAndGetForbidden() throws Exception {
+        mockMvc.perform(delete(API_PUBLISHERS + "/1"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void notDeleteAndGetUnauthorized() throws Exception {
+        mockMvc.perform(delete(API_PUBLISHERS + "/1"))
+                .andExpect(status().isUnauthorized());
     }
 }

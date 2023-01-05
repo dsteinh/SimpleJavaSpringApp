@@ -33,4 +33,9 @@ public class Rent {
         book.getRents().add(this);
     }
 
+    public void setUser(User user) {
+        this.user = user;
+        user.getRents().add(this);
+    }
+
 }

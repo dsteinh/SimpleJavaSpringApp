@@ -28,8 +28,9 @@ public class Book extends Product {
 
     @ManyToOne(cascade = CascadeType.MERGE)
     private Publisher publisher;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book", cascade = CascadeType.REMOVE)
     private List<Rent> rents = new ArrayList<>();
 
     public void setWriter(@NotNull Writer writer) {

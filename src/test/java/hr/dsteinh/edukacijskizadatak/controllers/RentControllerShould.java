@@ -3,6 +3,7 @@ package hr.dsteinh.edukacijskizadatak.controllers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
 import hr.dsteinh.edukacijskizadatak.model.Rent;
 import hr.dsteinh.edukacijskizadatak.mother.RentMother;
 import hr.dsteinh.edukacijskizadatak.service.RentService;
@@ -10,7 +11,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -25,6 +28,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(RentController.class)
+@Import(SecurityConfig.class)
 class RentControllerShould {
 
     public static final String TEST_RENT_JSON = "src/test/resources/controller/test_rent.json";
@@ -82,9 +86,22 @@ class RentControllerShould {
                 .andExpect(status().isOk());
     }
 
+    @WithMockUser(roles = "ADMIN")
     @Test
     void deleteRentById() throws Exception {
         mockMvc.perform(delete(API_RENTS + "/2"))
                 .andExpect(status().isOk());
+    }
+    @WithMockUser
+    @Test
+    void notDeleteAndGetForbidden() throws Exception {
+        mockMvc.perform(delete(API_RENTS + "/1"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void notDeleteAndGetUnauthorized() throws Exception {
+        mockMvc.perform(delete(API_RENTS + "/1"))
+                .andExpect(status().isUnauthorized());
     }
 }

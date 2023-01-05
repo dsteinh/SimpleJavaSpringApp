@@ -1,6 +1,7 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
 import hr.dsteinh.edukacijskizadatak.mother.WriterMother;
 import hr.dsteinh.edukacijskizadatak.service.WriterService;
@@ -8,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -23,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(WriterController.class)
+@Import(SecurityConfig.class)
 class WriterControllerShould {
 
     public static final String TEST_WRITER_JSON = "src/test/resources/controller/test_writer.json";
@@ -78,10 +82,22 @@ class WriterControllerShould {
                 .andExpect(content().string(jsonWriterToString))
                 .andExpect(status().isOk());
     }
-
+    @WithMockUser(roles = "ADMIN")
     @Test
     void deleteWriterById() throws Exception {
         mockMvc.perform(delete(API_WRITERS + "/1"))
                 .andExpect(status().isOk());
+    }
+    @WithMockUser
+    @Test
+    void notDeleteAndGetForbidden() throws Exception {
+        mockMvc.perform(delete(API_WRITERS + "/1"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void notDeleteAndGetUnauthorized() throws Exception {
+        mockMvc.perform(delete(API_WRITERS + "/1"))
+                .andExpect(status().isUnauthorized());
     }
 }

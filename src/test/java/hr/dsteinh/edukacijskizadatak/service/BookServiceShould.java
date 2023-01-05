@@ -87,13 +87,15 @@ class BookServiceShould {
     @Test
     void findBookByIsbn() throws Exception {
         byte[] bytes = Files.readAllBytes(Paths.get("src/test/resources/service/test_book.json"));
-        String s = new String(bytes);
+        String bookJsonString = new String(bytes)
+                .replace("\n", "")
+                .replace("\r", "")
+                .replace(" ", "");
 
         String isbn = "9781617294136";
 
-
         ResponseEntity<String> actualResponse = bookService.findByIsbn(isbn);
 
-        assertEquals(s, actualResponse.getBody());
+        assertEquals(bookJsonString, actualResponse.getBody().replace(" ", ""));
     }
 }

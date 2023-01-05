@@ -20,14 +20,8 @@ public class Writer extends Person {
     private Long id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Book> books = new ArrayList<>();
-
-    public Writer(String fName, String lName, String oib) {
-        super.setFirstName(fName);
-        super.setLastName(lName);
-        super.setOib(oib);
-    }
 
     public Writer(long id, String fName, String lName, String oib) {
         this.id = id;

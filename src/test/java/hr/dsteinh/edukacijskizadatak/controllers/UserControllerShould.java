@@ -1,6 +1,7 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import hr.dsteinh.edukacijskizadatak.mother.UserMother;
 import hr.dsteinh.edukacijskizadatak.service.UserService;
@@ -8,7 +9,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -23,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(UserController.class)
+@Import(SecurityConfig.class)
 class UserControllerShould {
 
     public static final String TEST_USER_JSON = "src/test/resources/controller/test_user.json";
@@ -82,9 +86,22 @@ class UserControllerShould {
                 .andExpect(status().isOk());
     }
 
+    @WithMockUser(roles = "ADMIN")
     @Test
     void deleteUserById() throws Exception {
         mockMvc.perform(delete(API_USERS + "/2"))
                 .andExpect(status().isOk());
+    }
+    @WithMockUser
+    @Test
+    void notDeleteAndGetForbidden() throws Exception {
+        mockMvc.perform(delete(API_USERS + "/1"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
+    void notDeleteAndGetUnauthorized() throws Exception {
+        mockMvc.perform(delete(API_USERS + "/1"))
+                .andExpect(status().isUnauthorized());
     }
 }
