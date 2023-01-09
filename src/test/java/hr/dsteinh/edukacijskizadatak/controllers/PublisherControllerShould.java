@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
 import hr.dsteinh.edukacijskizadatak.mother.PublisherMother;
+import hr.dsteinh.edukacijskizadatak.security.JpaUserDetailsService;
 import hr.dsteinh.edukacijskizadatak.service.PublisherService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ class PublisherControllerShould {
     @MockBean
     PublisherService publisherService;
 
+    @MockBean
+    JpaUserDetailsService userDetailsService;
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
@@ -84,12 +87,13 @@ class PublisherControllerShould {
                 .andExpect(status().isOk());
     }
 
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     @Test
     void deletePublisherById() throws Exception {
         mockMvc.perform(delete(API_PUBLISHERS + "/2"))
                 .andExpect(status().isOk());
     }
+
     @WithMockUser
     @Test
     void notDeleteAndGetForbidden() throws Exception {

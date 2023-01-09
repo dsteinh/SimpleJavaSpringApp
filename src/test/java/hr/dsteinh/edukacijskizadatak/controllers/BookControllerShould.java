@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
 import hr.dsteinh.edukacijskizadatak.mother.BookMother;
+import hr.dsteinh.edukacijskizadatak.security.JpaUserDetailsService;
 import hr.dsteinh.edukacijskizadatak.service.BookService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,9 @@ class BookControllerShould {
     MockMvc mockMvc;
     @MockBean
     BookService bookService;
+
+    @MockBean
+    JpaUserDetailsService userDetailsService;
 
     private final ObjectMapper mapper = new ObjectMapper();
 
@@ -87,7 +91,7 @@ class BookControllerShould {
                 .andExpect(status().isOk());
     }
 
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     @Test
     void deleteBookById() throws Exception {
         mockMvc.perform(delete(API_BOOKS + "/1"))

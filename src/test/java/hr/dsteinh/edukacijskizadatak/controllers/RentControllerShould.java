@@ -6,6 +6,7 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
 import hr.dsteinh.edukacijskizadatak.model.Rent;
 import hr.dsteinh.edukacijskizadatak.mother.RentMother;
+import hr.dsteinh.edukacijskizadatak.security.JpaUserDetailsService;
 import hr.dsteinh.edukacijskizadatak.service.RentService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,9 @@ class RentControllerShould {
     MockMvc mockMvc;
     @MockBean
     RentService rentService;
+
+    @MockBean
+    JpaUserDetailsService userDetailsService;
     private final ObjectMapper mapper = new JsonMapper();
 
 
@@ -86,7 +90,7 @@ class RentControllerShould {
                 .andExpect(status().isOk());
     }
 
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     @Test
     void deleteRentById() throws Exception {
         mockMvc.perform(delete(API_RENTS + "/2"))

@@ -10,16 +10,16 @@
             <column name="oib" value="49549243428"/>
             <column name="first_name" value="Mirko"/>
             <column name="last_name" value="Mirkotić"/>
-            <column name="username" value="m_mirko"/>
-            <column name="password" value="********"/>
+            <column name="username" value="admin"/>
+            <column name="password" value="$2a$12$78FcA1rgPhS4vfGMhDmA5.bz4XZD0DgLy6CQZQDoieDQ0dyWM9MrW"/>
         </insert>
         <insert tableName="user_table">
             <column name="id" value="2"/>
             <column name="oib" value="44342895492"/>
             <column name="first_name" value="Milica"/>
             <column name="last_name" value="Krmpotić"/>
-            <column name="username" value="m_milica"/>
-            <column name="password" value="********"/>
+            <column name="username" value="user"/>
+            <column name="password" value="$2a$12$mtL3sYvSD57RyrWLCYagjONKd5QkWYCDtX9hfYBXLaJBGnFTwL8wy"/>
         </insert>
         <insert tableName="user_table">
             <column name="id" value="3"/>
@@ -85,6 +85,28 @@
             <column name="book_id" value="1"/>
             <column name="user_id" value="1"/>
             <column name="total_amount" value="50"/>
+        </insert>
+    </changeSet>
+    <changeSet id="add_AUTHORITY" author="dodo">
+        <insert tableName="authority">
+            <column name="id" value="1"/>
+            <column name="role" value="ADMIN"/>
+        </insert>
+        <insert tableName="authority">
+            <column name="id" value="2"/>
+            <column name="role" value="USER"/>
+        </insert>
+    </changeSet>
+    <changeSet id="add_USER_AUTHORITY" author="dodo">
+        <insert tableName="user_authority">
+            <column name="id" value="1"/>
+            <column name="user_id" value="1"/>
+            <column name="authority_id" value="1"/>
+        </insert>
+        <insert tableName="user_authority">
+            <column name="id" value="2"/>
+            <column name="user_id" value="2"/>
+            <column name="authority_id" value="2"/>
         </insert>
     </changeSet>
 </databaseChangeLog>

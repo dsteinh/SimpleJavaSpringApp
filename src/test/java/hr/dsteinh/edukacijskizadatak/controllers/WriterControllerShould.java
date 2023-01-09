@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
 import hr.dsteinh.edukacijskizadatak.mother.WriterMother;
+import hr.dsteinh.edukacijskizadatak.security.JpaUserDetailsService;
 import hr.dsteinh.edukacijskizadatak.service.WriterService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ class WriterControllerShould {
     MockMvc mockMvc;
     @MockBean
     WriterService writerService;
+
+    @MockBean
+    JpaUserDetailsService userDetailsService;
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Test
@@ -82,7 +86,7 @@ class WriterControllerShould {
                 .andExpect(content().string(jsonWriterToString))
                 .andExpect(status().isOk());
     }
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     @Test
     void deleteWriterById() throws Exception {
         mockMvc.perform(delete(API_WRITERS + "/1"))

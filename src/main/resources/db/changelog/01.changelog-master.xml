@@ -8,6 +8,9 @@
     <changeSet id="1669921896924-1" author="Dodo (generated)">
         <createSequence incrementBy="1" sequenceName="hibernate_sequence" startValue="1"/>
     </changeSet>
+
+    <include file="db/changelog/04.add-authority-table-changelog.xml"/>
+
     <changeSet id="1669921896924-2" author="Dodo (generated)">
         <createTable tableName="book">
             <column name="id" type="BIGINT">
@@ -57,6 +60,10 @@
             <column name="first_name" type="VARCHAR(255)"/>
             <column name="last_name" type="VARCHAR(255)"/>
             <column name="oib" type="VARCHAR(255)"/>
+            <column name="enabled" type="BIGINT" defaultValueBoolean="true"/>
+            <column name="account_non_expired" type="BIGINT" defaultValueBoolean="true"/>
+            <column name="account_non_locked" type="BIGINT" defaultValueBoolean="true"/>
+            <column name="credentials_non_expired" type="BIGINT" defaultValueBoolean="true"/>
         </createTable>
     </changeSet>
     <changeSet id="1669921896924-6" author="Dodo (generated)">

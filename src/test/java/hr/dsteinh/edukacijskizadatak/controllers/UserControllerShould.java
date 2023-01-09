@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
 import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import hr.dsteinh.edukacijskizadatak.mother.UserMother;
+import hr.dsteinh.edukacijskizadatak.security.JpaUserDetailsService;
 import hr.dsteinh.edukacijskizadatak.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +36,9 @@ class UserControllerShould {
     MockMvc mockMvc;
     @MockBean
     UserService userService;
+
+    @MockBean
+    JpaUserDetailsService userDetailsService;
     private final ObjectMapper mapper = new ObjectMapper();
 
 
@@ -86,7 +90,7 @@ class UserControllerShould {
                 .andExpect(status().isOk());
     }
 
-    @WithMockUser(roles = "ADMIN")
+    @WithMockUser(authorities = "ADMIN")
     @Test
     void deleteUserById() throws Exception {
         mockMvc.perform(delete(API_USERS + "/2"))
