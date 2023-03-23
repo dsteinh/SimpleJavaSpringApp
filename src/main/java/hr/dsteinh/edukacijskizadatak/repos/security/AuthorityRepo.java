@@ -1,4 +1,4 @@
-package hr.dsteinh.edukacijskizadatak.repos;
+package hr.dsteinh.edukacijskizadatak.repos.security;
 
 import hr.dsteinh.edukacijskizadatak.model.security.Authority;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -1,6 +1,6 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
+import hr.dsteinh.edukacijskizadatak.model.Writer;
 import hr.dsteinh.edukacijskizadatak.service.WriterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

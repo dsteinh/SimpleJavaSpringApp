@@ -1,6 +1,6 @@
 package hr.dsteinh.edukacijskizadatak.service;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
+import hr.dsteinh.edukacijskizadatak.model.Publisher;
 import hr.dsteinh.edukacijskizadatak.mother.PublisherMother;
 import hr.dsteinh.edukacijskizadatak.repos.PublisherRepo;
 import org.junit.jupiter.api.Test;

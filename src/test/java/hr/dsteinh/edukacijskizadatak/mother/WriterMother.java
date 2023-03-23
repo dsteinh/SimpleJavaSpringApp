@@ -1,9 +1,13 @@
 package hr.dsteinh.edukacijskizadatak.mother;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
+import hr.dsteinh.edukacijskizadatak.model.Writer;
 
 public class WriterMother {
     public static Writer createWriter(){
-        return new Writer(1L, "uncle", "Bob", "1231234");
+        return  Writer.builder()
+                .id(1L)
+                .firstName("Uncle")
+                .lastName("Bob")
+                .oib("1231234").build();
     }
 }

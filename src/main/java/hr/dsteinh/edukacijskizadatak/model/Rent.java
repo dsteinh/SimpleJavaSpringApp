@@ -1,11 +1,13 @@
 package hr.dsteinh.edukacijskizadatak.model;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
+import hr.dsteinh.edukacijskizadatak.model.security.User;
 import lombok.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -25,8 +27,12 @@ public class Rent {
 
     private double totalAmount;
 
-    private LocalDateTime rentDate;
-    private LocalDateTime returnDate;
+    @CreationTimestamp
+    @Column(updatable = false)
+    private Timestamp rentDate;
+
+    @UpdateTimestamp
+    private Timestamp returnDate;
 
     public void setBook(Book book) {
         this.book = book;

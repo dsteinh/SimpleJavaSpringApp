@@ -1,6 +1,6 @@
 package hr.dsteinh.edukacijskizadatak.service;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
+import hr.dsteinh.edukacijskizadatak.model.Publisher;
 import hr.dsteinh.edukacijskizadatak.repos.PublisherRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

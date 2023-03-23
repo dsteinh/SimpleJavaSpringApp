@@ -1,8 +1,9 @@
 package hr.dsteinh.edukacijskizadatak.service;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
+import hr.dsteinh.edukacijskizadatak.model.security.User;
 import hr.dsteinh.edukacijskizadatak.mother.UserMother;
-import hr.dsteinh.edukacijskizadatak.repos.UserRepo;
+import hr.dsteinh.edukacijskizadatak.repos.security.UserRepo;
+import hr.dsteinh.edukacijskizadatak.service.security.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -2,10 +2,10 @@ package hr.dsteinh.edukacijskizadatak.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
+import hr.dsteinh.edukacijskizadatak.model.security.User;
 import hr.dsteinh.edukacijskizadatak.mother.UserMother;
 import hr.dsteinh.edukacijskizadatak.security.JpaUserDetailsService;
-import hr.dsteinh.edukacijskizadatak.service.UserService;
+import hr.dsteinh.edukacijskizadatak.service.security.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;

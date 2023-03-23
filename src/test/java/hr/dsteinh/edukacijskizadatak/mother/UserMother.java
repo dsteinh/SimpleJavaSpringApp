@@ -1,9 +1,13 @@
 package hr.dsteinh.edukacijskizadatak.mother;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
+import hr.dsteinh.edukacijskizadatak.model.security.User;
 
 public class UserMother {
     public static User createUser() {
-        return new User(1L, "Domagoj", "Stein", "34563456");
+        return User.builder()
+                .id(1L)
+                .firstName("Domagoj")
+                .lastName("Stein")
+                .oib("34563456").build();
     }
 }

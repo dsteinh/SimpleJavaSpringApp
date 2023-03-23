@@ -1,1 +1,1 @@
-{"name":null,"price":0.0,"quantity":0,"description":null,"id":1,"isbn":"12345678","writer":{"oib":"1231234","firstName":"uncle","lastName":"Bob","id":1},"publisher":{"oib":"0987654","id":1,"name":"knjiga.hr"}}
+{"id":1,"name":null,"price":0.0,"quantity":0,"description":null,"isbn":"12345678","writer":{"id":1,"firstName":"Uncle","lastName":"Bob","oib":"1231234"},"publisher":{"id":1,"name":"knjiga.hr","oib":"0987654123"}}

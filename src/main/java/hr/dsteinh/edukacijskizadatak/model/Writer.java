@@ -1,4 +1,4 @@
-package hr.dsteinh.edukacijskizadatak.model.legal_entity.person;
+package hr.dsteinh.edukacijskizadatak.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
@@ -14,21 +14,19 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @AllArgsConstructor
-public class Writer extends Person {
+public class Writer {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    private String firstName;
+    private String lastName;
+    private String oib;
 
     @JsonIgnore
     @OneToMany(mappedBy = "writer", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private List<Book> books = new ArrayList<>();
 
-    public Writer(long id, String fName, String lName, String oib) {
-        this.id = id;
-        super.setFirstName(fName);
-        super.setLastName(lName);
-        super.setOib(oib);
-    }
 
     @Override
     public String toString() {

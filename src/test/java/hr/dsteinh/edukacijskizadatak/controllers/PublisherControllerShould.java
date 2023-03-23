@@ -2,7 +2,7 @@ package hr.dsteinh.edukacijskizadatak.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hr.dsteinh.edukacijskizadatak.config.SecurityConfig;
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
+import hr.dsteinh.edukacijskizadatak.model.Publisher;
 import hr.dsteinh.edukacijskizadatak.mother.PublisherMother;
 import hr.dsteinh.edukacijskizadatak.security.JpaUserDetailsService;
 import hr.dsteinh.edukacijskizadatak.service.PublisherService;

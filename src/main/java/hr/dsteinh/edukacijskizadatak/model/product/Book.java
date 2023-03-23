@@ -1,9 +1,9 @@
 package hr.dsteinh.edukacijskizadatak.model.product;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import hr.dsteinh.edukacijskizadatak.model.Publisher;
 import hr.dsteinh.edukacijskizadatak.model.Rent;
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
+import hr.dsteinh.edukacijskizadatak.model.Writer;
 import lombok.*;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,11 +17,15 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Book extends Product {
+public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private String name;
+    private double price;
+    private int quantity;
+    private String description;
     private String isbn;
     @ManyToOne(cascade = CascadeType.MERGE)
     private Writer writer;
@@ -37,6 +41,7 @@ public class Book extends Product {
         this.writer = writer;
         writer.getBooks().add(this);
     }
+
     public void setPublisher(Publisher publisher) {
         this.publisher = publisher;
         publisher.getBooks().add(this);

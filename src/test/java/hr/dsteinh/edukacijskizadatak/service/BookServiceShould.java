@@ -1,8 +1,7 @@
 package hr.dsteinh.edukacijskizadatak.service;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.Publisher;
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
 import hr.dsteinh.edukacijskizadatak.model.product.Book;
+import hr.dsteinh.edukacijskizadatak.mother.BookMother;
 import hr.dsteinh.edukacijskizadatak.repos.BookRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,7 +60,7 @@ class BookServiceShould {
     void findBookById() {
         // Given
         long id = 1L;
-        Book expectedBook = new Book(id, "123", new Writer(), new Publisher(), new ArrayList<>());
+        Book expectedBook = BookMother.createBook();
 
         given(bookRepo.findById(id)).willReturn(Optional.of(expectedBook));
 

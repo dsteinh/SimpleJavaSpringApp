@@ -48,8 +48,8 @@
             <column name="total_amount" type="DOUBLE">
                 <constraints nullable="false"/>
             </column>
-            <column name="rent_date" type="DATETIME"/>
-            <column name="return_date" type="DATETIME"/>
+            <column name="rent_date" defaultValueComputed="CURRENT_TIMESTAMP" type="TIMESTAMP" />
+            <column name="return_date" type="TIMESTAMP"/>
         </createTable>
     </changeSet>
     <changeSet id="1669921896924-5" author="Dodo (generated)">

@@ -1,7 +1,7 @@
 package hr.dsteinh.edukacijskizadatak.controllers;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
-import hr.dsteinh.edukacijskizadatak.service.UserService;
+import hr.dsteinh.edukacijskizadatak.model.security.User;
+import hr.dsteinh.edukacijskizadatak.service.security.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

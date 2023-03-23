@@ -1,7 +1,8 @@
-package hr.dsteinh.edukacijskizadatak.service;
+package hr.dsteinh.edukacijskizadatak.service.security;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
-import hr.dsteinh.edukacijskizadatak.repos.UserRepo;
+import hr.dsteinh.edukacijskizadatak.model.security.User;
+import hr.dsteinh.edukacijskizadatak.repos.security.UserRepo;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,12 +12,9 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class UserService {
     private final UserRepo userRepo;
-
-    public UserService(UserRepo userRepo) {
-        this.userRepo = userRepo;
-    }
 
     public List<User> findAll() {
         return userRepo.findAll();

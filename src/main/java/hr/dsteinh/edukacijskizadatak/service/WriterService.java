@@ -1,6 +1,6 @@
 package hr.dsteinh.edukacijskizadatak.service;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.Writer;
+import hr.dsteinh.edukacijskizadatak.model.Writer;
 import hr.dsteinh.edukacijskizadatak.repos.WriterRepo;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

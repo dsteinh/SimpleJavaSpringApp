@@ -1,6 +1,5 @@
 package hr.dsteinh.edukacijskizadatak.model.security;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
 import lombok.*;
 
 import javax.persistence.*;

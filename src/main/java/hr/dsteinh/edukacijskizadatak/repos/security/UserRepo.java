@@ -1,6 +1,6 @@
-package hr.dsteinh.edukacijskizadatak.repos;
+package hr.dsteinh.edukacijskizadatak.repos.security;
 
-import hr.dsteinh.edukacijskizadatak.model.legal_entity.person.User;
+import hr.dsteinh.edukacijskizadatak.model.security.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
